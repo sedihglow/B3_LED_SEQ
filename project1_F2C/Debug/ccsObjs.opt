@@ -1,0 +1,1 @@
+"./project1_calcAvg.o" "./project1_convertF2C.o" "./project1_divWsub.o" "./project1_main.o" "./startup_ARMCA8.o" -Wl,-T"../AM335x.lds" -Wl,--start-group -l"c" -l"gcc" -l"nosys" -Wl,--end-group 

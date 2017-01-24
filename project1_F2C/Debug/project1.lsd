@@ -1,0 +1,57 @@
+ARM GAS  ../project1_main.s 			page 1
+
+
+   1              	@ Array Multiply Program
+   2              	@ This program multiplies each half word from the Multiplicands
+   3              	@ array by the same numbered half word in MULTIPLIERS array and
+   4              	@ puts the result in the same numbered element in PRODUCTS array.
+   5              	@ Uses R1-R4, R6-R8
+   6              	@ ECE371 Microprocessors, Douglas V. Hall September 2016
+   7              	@ Edited by James Ross 10/27/2016
+   8              	
+   9              	.text
+  10              	.global _start
+  11              	_start:
+  12              	.equ NUM, 4
+  13 0000 24109FE5 		LDR R1, = MULTIPLICANDS @ load pointer to MULTIPLICANDS array
+  14 0004 24209FE5 		LDR R2, = MULTIPLIERS 	@ load pointer to MULTIPLIERS array
+  15 0008 24309FE5 		LDR R3, = PRODUCTS 		@ load pointer to PRODUCTS array
+  16 000c 0440A0E3 		MOV R4, #NUM 			@ initialize loop counter
+  17              	NEXT: 
+  18 0010 B260D1E0 		LDRH R6, [R1], #2 	@ load a MULTIPLICAND Half word in R6, inc [R1] addr
+  19 0014 B270D2E0 		LDRH R7, [R2], #2   @ load a MULTIPLIER half Word in R7, inc [R2] addr
+  20 0018 960708E0 		MUL  R8, R6, R7     @ multiply
+  21 001c 014054E2 		SUBS R4, #1 	    @ decrement loop counter by 1
+  22              		
+  23              							@ STR after index decrement to prevent potential 
+  24              							@ stall on R8 waiting for MUL result.
+  25              							
+  26 0020 048083E4 		STR  R8, [R3], #4 	@ store result in PRODUCTS array, inc [R3] addr
+  27 0024 F9FFFF1A 		BNE  NEXT 		    @ go to NEXT if all elements not multiplied
+  28 0028 00F020E3 		NOP 			    @ instruction for breakpoint. Does nothing.
+  29              		
+  30              	.data
+  31 0000 11112222 	MULTIPLICANDS: .HWORD 0x1111, 0x2222, 0x3333, 0x4444
+  31      33334444 
+  32 0008 11112222 	MULTIPLIERS:   .HWORD 0x1111, 0x2222, 0X3333, 0x4444
+  32      33334444 
+  33 0010 00000000 	PRODUCTS: 	   .WORD 0x0, 0x0, 0x0, 0x0
+  33      00000000 
+  33      00000000 
+  33      00000000 
+  34              	.END...
+ARM GAS  ../project1_main.s 			page 2
+
+
+DEFINED SYMBOLS
+  ../project1_main.s:11     .text:00000000 _start
+  ../project1_main.s:12     *ABS*:00000004 NUM
+  ../project1_main.s:31     .data:00000000 MULTIPLICANDS
+  ../project1_main.s:13     .text:00000000 $a
+  ../project1_main.s:32     .data:00000008 MULTIPLIERS
+  ../project1_main.s:33     .data:00000010 PRODUCTS
+  ../project1_main.s:17     .text:00000010 NEXT
+  ../project1_main.s:30     .text:0000002c $d
+                   .debug_aranges:0000000c $d
+
+NO UNDEFINED SYMBOLS

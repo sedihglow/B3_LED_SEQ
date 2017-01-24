@@ -1,0 +1,94 @@
+ARM GAS  ../project2_P2_intDirector.s 			page 1
+
+
+   1              	@ Filename: project2_P2_intDirector.s
+   2              	@
+   3              	@ Contains the interuppt director for our interupts. There is no sys interrupts
+   4              	@ so hooking is contained in startup_ARMCA8.S directly on the vector table.
+   5              	@ This function will ensure the button was pressed for our interrupt, check
+   6              	@ the state of the blinking LED's. If they are currently blinking, the 
+   7              	@ interrupt will disable them, if they are not blinking it will enable them.
+   8              	@
+   9              	@ Written by: James Ross
+  10              	
+  11              	.text
+  12              	.global _int_director
+  13              	_int_director:
+  14              	.equ INTC_BASE,			  0x48200000  @ INCPS 				Base Address
+  15              	.equ INTC_CONTROL,		  0x48		  @ INTC_CONTROL		register offset
+  16              	.equ INTC_MIR_CLEAR3,	  0xE8		  @ INTC_MIR_CLEAR3 	register offset
+  17              	.equ INTC_PENDING_IRQ3,	  0xF8		  @ INTC_PENDING_IRQ3	register offset
+  18              	
+  19              	.equ GPIO1_BASE,		  0x4804C000  @ GPIO1 				Base Address
+  20              	.equ GPIOINT1A, 		  0x00000004  @ GPIOINT1A in MIR3   Mask
+  21              	.equ GPIO_IRQ_STAT_0,	  0x2C	  	  @ GPIO_IRQSTATUS_0 	register offset
+  22              	.equ GPIO_31,			  0x80000000  @ GPIO_31 raised bit	Mask
+  23              	
+  24              	gpio1_baseAddr .req R4
+  25              	intc_baseAddr  .req R7
+  26              	bValue		   .req R9
+  27              	bFlag 		   .req R10
+  28              	t1   		   .req R11	@ scratch register 1
+  29              	t2 			   .req R12 @ scratch register 2
+  30              	
+  31              	
+  32 0000 925E2DE9 		STMFD SP!, {R1,R4, R7, R9-R12, LR}
+  33              		
+  34              		@ Make sure the interrupt occured from GPIO1_31 button press		
+  35 0004 4C709FE5 		LDR intc_baseAddr,=INTC_BASE
+  36 0008 F8C097E5 		LDR t2, [intc_baseAddr, #INTC_PENDING_IRQ3]
+  37 000c 04001CE3 		TST t2, #GPIOINT1A
+  38 0010 0400000A 		BEQ END_SERVICE	    @ If GPIOINT1A_2 is a 0, exit interrupt, not button.
+  39              	
+  40              		@ Check if the button on GPIO_31 triggered the interrupt
+  41 0014 40409FE5 		LDR	gpio1_baseAddr, =GPIO1_BASE
+  42 0018 2CC094E5 		LDR t2, [gpio1_baseAddr, #GPIO_IRQ_STAT_0]
+  43 001c 02011CE3 		TST t2, #GPIO_31
+  44 0020 0200001A 		BNE SVC_BUTTON	 @ If GPIO_31 has a pending interrupt, service the button
+  45 0024 FFFFFF0A 		BEQ END_SERVICE  @ Else, it was not the button, no service required
+  46              		
+  47              	END_SERVICE:		
+  48 0028 925EBDE8 		LDMFD SP!, {R1,R4, R7, R9-R12, LR}
+  49 002c 04F05EE2 		SUBS PC, LR, #4 @ Return to interupted program. Accounts for pipeline EX
+  50              		
+  51              	SVC_BUTTON:
+  52              		@ Disable GPIO_31 interrupt requests and INTC interrupt requests
+  53 0030 0211A0E3 		MOV R1, #GPIO_31
+  54 0034 2C1084E5 		STR R1, [gpio1_baseAddr, #GPIO_IRQ_STAT_0] @ Store 1 at bit 31 of GPIO_IRQ_STAT_0
+  55              		
+  56              		@ Disable NEWIRQA bit so processor can respond to IRQ
+  57 0038 01C0A0E3 		MOV t2, #0x1
+ARM GAS  ../project2_P2_intDirector.s 			page 2
+
+
+  58 003c 48C087E5 		STR t2, [intc_baseAddr, #INTC_CONTROL]
+  59              	
+  60 0040 00909AE5 		LDR bValue, [bFlag]	
+  61 0044 000059E3 		CMP bValue, #0x0
+  62 0048 0110A003 		MOVEQ R1, #0x1 @ If blinkFlag == 0, set flag to initate blinking(1)
+  63 004c 0010A013 		MOVNE R1, #0x0 @ Else blinkFlag == 1, set flag to stop blinking (0)
+  64 0050 00108AE5 		STR R1, [bFlag]
+  65              			
+  66 0054 F3FFFFEA 		B END_SERVICE
+  67 0058 00002048 	.end...
+  67      00C00448 
+ARM GAS  ../project2_P2_intDirector.s 			page 3
+
+
+DEFINED SYMBOLS
+../project2_P2_intDirector.s:13     .text:00000000 _int_director
+../project2_P2_intDirector.s:14     *ABS*:48200000 INTC_BASE
+../project2_P2_intDirector.s:15     *ABS*:00000048 INTC_CONTROL
+../project2_P2_intDirector.s:16     *ABS*:000000e8 INTC_MIR_CLEAR3
+../project2_P2_intDirector.s:17     *ABS*:000000f8 INTC_PENDING_IRQ3
+../project2_P2_intDirector.s:19     *ABS*:4804c000 GPIO1_BASE
+../project2_P2_intDirector.s:20     *ABS*:00000004 GPIOINT1A
+../project2_P2_intDirector.s:21     *ABS*:0000002c GPIO_IRQ_STAT_0
+../project2_P2_intDirector.s:22     *ABS*:80000000 GPIO_31
+../project2_P2_intDirector.s:32     .text:00000000 $a
+../project2_P2_intDirector.s:47     .text:00000028 END_SERVICE
+../project2_P2_intDirector.s:51     .text:00000030 SVC_BUTTON
+../project2_P2_intDirector.s:67     .text:00000058 $d
+                   .debug_aranges:0000000c $d
+
+NO UNDEFINED SYMBOLS

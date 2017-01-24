@@ -1,0 +1,5 @@
+AbstractTextEditor.Color.Background=0,0,0
+AbstractTextEditor.Color.Background.SystemDefault=false
+eclipse.preferences.version=1
+org.eclipse.cdt.ui.occurrenceIndicationColor=128,0,0
+overviewRuler_migration=migrated_3.1

@@ -1,0 +1,209 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+SRAM             0x402f0400         0x0000fc00
+L3OCMC0          0x40300000         0x00010000
+M3SHUMEM         0x44d00000         0x00004000
+M3SHDMEM         0x44d80000         0x00002000
+DDR0             0x80000000         0x40000000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00018000                STACKSIZE = 0x18000
+                0x00000400                HEAPSIZE = 0x400
+LOAD ./project2_P3_blinkLoop.o
+LOAD ./project2_P3_intDirector.o
+LOAD ./project2_P3_main.o
+LOAD ./project2_P3_toggleLED.o
+LOAD ./startup_ARMCA8.o
+
+.rsthand        0x80000000       0x70
+                0x80000000                . = ALIGN (0x10000)
+ *(.isr_vector)
+ .isr_vector    0x80000000       0x50 ./startup_ARMCA8.o
+                0x80000000                __isr_vector
+                0x8000004e                DEF_IRQHandler
+ *startup_ARMCA8.o(.text)
+ .text          0x80000050       0x20 ./startup_ARMCA8.o
+                0x80000050                Entry
+                0x80000070                . = ALIGN (0x4)
+
+.text           0x80000070      0x300
+ *(.text*)
+ .text          0x80000070       0xe8 ./project2_P3_blinkLoop.o
+                0x80000070                _blink_sequence
+                0x80000140                _stop_blink
+ .text          0x80000158       0xec ./project2_P3_intDirector.o
+                0x80000158                _int_director
+ .text          0x80000244      0x110 ./project2_P3_main.o
+                0x80000244                _start
+ .text          0x80000354       0x1c ./project2_P3_toggleLED.o
+                0x80000354                _GPIO1_toggleLED
+ *(.init)
+ *(.fini)
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ *(.rodata*)
+ *(.eh_frame*)
+
+.glue_7         0x80000370        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x80000370        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x80000370        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x80000370        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x80000370        0x0
+ .iplt          0x00000000        0x0 ./project2_P3_blinkLoop.o
+
+.rel.dyn        0x80000370        0x0
+ .rel.iplt      0x00000000        0x0 ./project2_P3_blinkLoop.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x80000370                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x80000370                __exidx_end = .
+
+.data           0x80000370     0x2008
+                0x80000370                . = ALIGN (0x4)
+                0x80000370                __data_start__ = .
+ *(vtable)
+ *(.data*)
+ .data          0x80000370        0x0 ./project2_P3_blinkLoop.o
+ .data          0x80000370        0x0 ./project2_P3_intDirector.o
+ .data          0x80000370     0x2008 ./project2_P3_main.o
+ .data          0x80002378        0x0 ./project2_P3_toggleLED.o
+ .data          0x80002378        0x0 ./startup_ARMCA8.o
+                0x80002378                . = ALIGN (0x4)
+                0x80002378                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x80002378                PROVIDE (__preinit_array_end, .)
+                0x80002378                . = ALIGN (0x4)
+                0x80002378                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x80002378                PROVIDE (__init_array_end, .)
+                0x80002378                . = ALIGN (0x4)
+                0x80002378                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array)
+                0x80002378                PROVIDE (__fini_array_end, .)
+                0x80002378                . = ALIGN (0x4)
+                0x80002378                __data_end__ = .
+
+.igot.plt       0x80002378        0x0
+ .igot.plt      0x00000000        0x0 ./project2_P3_blinkLoop.o
+
+.bss            0x80002378        0x0
+                0x80002378                . = ALIGN (0x4)
+                0x80002378                __bss_start__ = .
+ *(.bss*)
+ .bss           0x80002378        0x0 ./project2_P3_blinkLoop.o
+ .bss           0x80002378        0x0 ./project2_P3_intDirector.o
+ .bss           0x80002378        0x0 ./project2_P3_main.o
+ .bss           0x80002378        0x0 ./project2_P3_toggleLED.o
+ .bss           0x80002378        0x0 ./startup_ARMCA8.o
+ *(COMMON)
+                0x80002378                __bss_end__ = .
+
+.heap           0x80002380      0x400
+ FILL mask 0xdeadbeef
+                0x80002380                . = ALIGN (0x4)
+                0x80002380                __end__ = .
+                0x80002380                end = __end__
+                0x80002380                __HeapBase = __end__
+ *(.heap*)
+ .heap          0x80002380        0x0 ./startup_ARMCA8.o
+                0x80002780                . = (. + HEAPSIZE)
+ *fill*         0x80002380      0x400 deadbeef
+                0x80002780                __HeapLimit = .
+
+.stack          0x80002780    0x18000
+ FILL mask 0xbad0bad0
+                0x80002780                . = ALIGN (0x4)
+                0x80002780                __StackLimit = .
+ *(.stack*)
+ .stack         0x80002780        0x0 ./startup_ARMCA8.o
+                0x8001a780                . = (. + STACKSIZE)
+ *fill*         0x80002780    0x18000 bad0bad0
+                0x8001a780                __StackTop = .
+                0x8001a780                __StackBase = .
+                0x8001a780                PROVIDE (__stack, __StackTop)
+START GROUP
+LOAD c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc.a
+LOAD c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a
+LOAD c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libnosys.a
+END GROUP
+START GROUP
+LOAD c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a
+LOAD c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a
+LOAD c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc.a
+END GROUP
+OUTPUT(project2_P3_Timer.out elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x1f
+ .ARM.attributes
+                0x00000000       0x1f ./project2_P3_blinkLoop.o
+ .ARM.attributes
+                0x0000001f       0x1f ./project2_P3_intDirector.o
+ .ARM.attributes
+                0x0000003e       0x1f ./project2_P3_main.o
+ .ARM.attributes
+                0x0000005d       0x1f ./project2_P3_toggleLED.o
+ .ARM.attributes
+                0x0000007c       0x1f ./startup_ARMCA8.o
+
+.debug_line     0x00000000      0x264
+ .debug_line    0x00000000       0x86 ./project2_P3_blinkLoop.o
+ .debug_line    0x00000086       0x8b ./project2_P3_intDirector.o
+ .debug_line    0x00000111       0x92 ./project2_P3_main.o
+ .debug_line    0x000001a3       0x50 ./project2_P3_toggleLED.o
+ .debug_line    0x000001f3       0x71 ./startup_ARMCA8.o
+
+.debug_info     0x00000000      0x1eb
+ .debug_info    0x00000000       0x65 ./project2_P3_blinkLoop.o
+ .debug_info    0x00000065       0x67 ./project2_P3_intDirector.o
+ .debug_info    0x000000cc       0x60 ./project2_P3_main.o
+ .debug_info    0x0000012c       0x65 ./project2_P3_toggleLED.o
+ .debug_info    0x00000191       0x5a ./startup_ARMCA8.o
+
+.debug_abbrev   0x00000000       0x62
+ .debug_abbrev  0x00000000       0x14 ./project2_P3_blinkLoop.o
+ .debug_abbrev  0x00000014       0x14 ./project2_P3_intDirector.o
+ .debug_abbrev  0x00000028       0x14 ./project2_P3_main.o
+ .debug_abbrev  0x0000003c       0x14 ./project2_P3_toggleLED.o
+ .debug_abbrev  0x00000050       0x12 ./startup_ARMCA8.o
+
+.debug_aranges  0x00000000       0xa8
+ .debug_aranges
+                0x00000000       0x20 ./project2_P3_blinkLoop.o
+ .debug_aranges
+                0x00000020       0x20 ./project2_P3_intDirector.o
+ .debug_aranges
+                0x00000040       0x20 ./project2_P3_main.o
+ .debug_aranges
+                0x00000060       0x20 ./project2_P3_toggleLED.o
+ .debug_aranges
+                0x00000080       0x28 ./startup_ARMCA8.o
+
+.debug_ranges   0x00000000       0x20
+ .debug_ranges  0x00000000       0x20 ./startup_ARMCA8.o

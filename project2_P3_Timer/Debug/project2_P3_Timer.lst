@@ -1,0 +1,258 @@
+ARM GAS  ../project2_P3_main.s 			page 1
+
+
+   1              	@ Filename: project2_P3_main.s
+   2              	@ This program will utilize the USER LED's to blink in a specified pattern
+   3              	@
+   4              	@ GPIO banks and pins used:
+   5              	@ GPIO1 base address = 0x4804C000 | end address = 0x4804CFFF
+   6              	@ GPIO1_21 = LED 0  | proc pin = V15
+   7              	@ GPIO1_22 = LED 1  | proc pin = U15
+   8              	@ GPIO1_23 = LED 2  | proc pin = T15
+   9              	@ GPIO1_24 = LED 3  | proc pin = V16
+  10              	@ GOIO1_31 = BUTTON | 
+  11              	@ 
+  12              	@ Cycle through the LED's, blinking each one for 1second a piece, rotating
+  13              	@ through LED[0-3] when a button is pressed.
+  14              	@
+  15              	@ Interupt address information:
+  16              	@
+  17              	@ Board: Beagle Bone Black
+  18              	@ Written by: James Ross
+  19              	
+  20              	.text
+  21              	.global _start
+  22              	_start:
+  23              	@ CLK definitions
+  24              	.equ GPIO1_CLK_ENABLE,     0x00000002 @ Enable GPIO1 clk at CM_PER_GPIO_CLKCTRL
+  25              	.equ GPIO1_CLK_CTRL,       0x44E000AC @ CM_PER_GPIO1_CLKCTRL  register address
+  26              	.equ TIMER3_CLK_CTRL,	   0x44E00084 @ CM_PER_TIMER3_CLKCTRL register address
+  27              	.equ TIMER3_CLKSEL,		   0x44E0050C @ CLKSEL_TIMER3_CLK 	  register address
+  28              	
+  29              	@ GPIO definitions
+  30              	.equ GPIO1_BASE,		  0x4804C000  @ GPIO1 				Base Address
+  31              	.equ GPIO_OE, 			  0x134 	  @ GPIO_OE 		    register offset
+  32              	.equ GPIO_CLEAR_DATA_OUT, 0x190 	  @ GPIO_CLEARDATAOUT 	register offset
+  33              	.equ GPIO_SET_DATA_OUT,   0x194 	  @ GPIO_SETDATAOUT 	register offset
+  34              	.equ GPIO_FALLING_DETECT, 0x14C	  	  @ GPIO_FALLINGDETECT 	register offset
+  35              	.equ GPIO_IRQ_STAT_0,	  0x2C	  	  @ GPIO_IRQSTATUS_0 	register offset
+  36              	.equ GPIO_IRQ_STAT_SET_0, 0x34 	      @ GPIO_IRQSTAT_SET_0  register offset
+  37              	
+  38              	@ Interupt definitions
+  39              	.equ INTC_BASE,			  0x48200000  @ INCPS 				Base Address
+  40              	.equ INTC_CONTROL,		  0x48		  @ INTC_CONTROL		register offset
+  41              	.equ INTC_CONFIG,		  0x10		  @ INTC_SYSCONFIG		register offset
+  42              	.equ INTC_MIR_CLEAR2,	  0xC8		  @ INTC_MIR_CLEAR2     register offset
+  43              	.equ INTC_MIR_CLEAR3,	  0xE8		  @ INTC_MIR_CLEAR3 	register offset
+  44              	.equ INTC_MIR_SET3,		  0xEC		  @ INTC_MIR_SET3 		register offset
+  45              	.equ INTC_PENDING_IRQ3,	  0xF8		  @ INTC_PENDING_IRQ3	register offset
+  46              	.equ GPIOINT1A, 		  0x4		  @ GPIOINT1A in MIR3   Mask
+  47              	.equ TINT3, 		   	  0x20		  @ TINT3 in MIR2       Mask
+  48              	
+  49              	@ Timer defintions
+  50              	.equ TIMER3_BASE,		  0x48042000  @ DMTIMER3			Base Address
+  51              	.equ TIOCP_CFG,			  0x10		  @ TIOCP_CFG			register offset
+  52              	.equ IRQ_ENABLE_SET,	  0x2C		  @ IRQENABLE_SET		register offset
+  53              	.equ TCLR,				  0x38		  @ TCLR				register offset
+  54              	.equ TCRR,				  0x3C		  @ TCRR				register offset
+  55              	.equ TLDR,				  0x40		  @ TLDR				register offset
+  56              	.equ TIMER_COUNTER_VAL,   0xFFFF80FF  @ Loaded into TLDR and TCRR, 1.00793s
+  57              	
+ARM GAS  ../project2_P3_main.s 			page 2
+
+
+  58              	@ LED definitions
+  59              	.equ SET_ALL_LED_OUTPUT,   0xFE1FFFFF @ Mask to set LED[0-3] as outputs
+  60              	.equ SET_ALL_LED, 		   0x01E00000 @ Mask to set all LED's output
+  61              	
+  62              	@ Register assignments
+  63              	gpio1_baseAddr  .req R3
+  64              	intc_baseAddr   .req R5
+  65              	timer3_baseAddr .req R6
+  66              	ledToSet		.req R8   @ ADDR
+  67              	bValue 		    .req R9	  @ blinkFlag value
+  68              	bFlag  			.req R10  @ blinkFlag address
+  69              	temp1  			.req R11  @ scratch register 1
+  70              	temp2  			.req R12  @ screach register 2
+  71              	stack  			.req R13
+  72              	
+  73              	INIT_STACKS:
+  74 0000 E0D09FE5 		LDR stack,=SVC_STACK	   
+  75 0004 01DA8DE2 		ADD stack, stack, #0x1000 @ Point to top of stack
+  76 0008 120002F1 		CPS #0x12				  @ Switch to IRQ mode
+  77              		
+  78 000c D8D09FE5 		LDR stack,=IRQ_STACK		
+  79 0010 01DA8DE2 		ADD stack, stack, #0x1000 @ Point to top of stack
+  80 0014 130002F1 		CPS #0x13				  @ Switch to SVC mode
+  81              		
+  82              	INIT_GPIO:
+  83              		@ Set clock to GPIO1 as enabled
+  84 0018 02B0A0E3 		MOV temp1, #GPIO1_CLK_ENABLE
+  85 001c CCC09FE5 		LDR temp2, =GPIO1_CLK_CTRL
+  86 0020 00B08CE5 		STR temp1, [temp2]
+  87              	
+  88              		@ Set GPIO1_[21-24] as outputs, desired initial output is 0
+  89 0024 C8309FE5 		LDR gpio1_baseAddr, =GPIO1_BASE
+  90              		
+  91 0028 1EC6A0E3 		MOV temp2, #SET_ALL_LED
+  92 002c 90C183E5 		STR temp2, [gpio1_baseAddr, #GPIO_CLEAR_DATA_OUT]
+  93              	
+  94              		@ Enable GPIO1_[21-24]
+  95 0030 4DBF83E2 		ADD temp1, gpio1_baseAddr, #GPIO_OE
+  96 0034 1EC6E0E3 		MOV temp2, #SET_ALL_LED_OUTPUT
+  97 0038 00409BE5 		LDR R4, [temp1]     @ Load
+  98 003c 0C4004E0 		AND R4, R4, temp2	@ Modify to enable LED[0-3] as outputs
+  99 0040 00408BE5 		STR R4, [temp1]		@ Store
+ 100              	
+ 101              	INIT_INT:
+ 102              		@ Set interupt to trigger when falling from high to low
+ 103 0044 53BF83E2 		ADD temp1, gpio1_baseAddr, #GPIO_FALLING_DETECT
+ 104 0048 02C1A0E3 		MOV temp2, #0x80000000 	@ Set bit/pin 31 mask
+ 105 004c 00409BE5 		LDR R4, [temp1]
+ 106 0050 0C4084E1 		ORR R4, R4, temp2
+ 107 0054 00408BE5 		STR R4, [temp1]			@ Store GPIO1_31 as falling detect
+ 108              	
+ 109              		@ Enable interrupt field for GPIO1_31
+ 110 0058 34C083E5 		STR temp2, [gpio1_baseAddr, #GPIO_IRQ_STAT_SET_0]
+ 111              		
+ 112              		@ Initialize INTC
+ 113 005c 94509FE5 		LDR intc_baseAddr,=INTC_BASE
+ 114              		
+ARM GAS  ../project2_P3_main.s 			page 3
+
+
+ 115              		@ INTC for timer
+ 116 0060 02B0A0E3 		MOV temp1, #0x2  @ Value to reset INTC
+ 117 0064 10C085E5 		STR temp2, [intc_baseAddr, #INTC_CONFIG] @ Softreset INTC table
+ 118 0068 20B0A0E3 		MOV temp1, #TINT3
+ 119 006c C8B085E5 		STR temp1, [intc_baseAddr, #INTC_MIR_CLEAR2]
+ 120              		
+ 121              		@ INTC for button press
+ 122 0070 04C0A0E3 		MOV temp2, #GPIOINT1A			@ 0x4 in MIR3 holds GPIOINT1A POINTRPEND1
+ 123 0074 E8C085E5 		STR temp2, [intc_baseAddr, #INTC_MIR_CLEAR3]
+ 124              		
+ 125              	INIT_TIMER:
+ 126              		@ Turn on timer3 clock
+ 127 0078 02B0A0E3 	    MOV temp1, #0x2 @ Value to enable timer3 clk and 32khz mux select
+ 128 007c 78C09FE5 		LDR temp2, =TIMER3_CLK_CTRL
+ 129 0080 00B08CE5 		STR temp1, [temp2]
+ 130              		
+ 131              		
+ 132              		@ Set PCRMCLKSEL_TIMER3 so the mux pulls from the 32khz clock
+ 133 0084 74C09FE5 		LDR temp2, =TIMER3_CLKSEL
+ 134 0088 00B08CE5 		STR temp1, [temp2]
+ 135              	
+ 136 008c 70609FE5 		LDR timer3_baseAddr, =TIMER3_BASE
+ 137              		
+ 138              		@ Turn off timer in-case state of beagle bone has it enabled
+ 139 0090 3810A0E3 		MOV R1, #0x38 	  @ reset TCLR
+ 140 0094 381086E5 		STR R1, [timer3_baseAddr, #TCLR] @ Set the TCLR
+ 141              		
+ 142              		@ Initialize timer3 registers. set count and overflow INT generation	
+ 143 0098 01B0A0E3 		MOV temp1, #0x1 @ value for software reset in TIOCP_CFG
+ 144 009c 10B086E5 		STR temp1, [timer3_baseAddr, #TIOCP_CFG]
+ 145              	
+ 146              	    @ Enable overflow interrupt
+ 147 00a0 02B0A0E3 		MOV temp1, #0x2
+ 148 00a4 2CB086E5 		STR temp1, [timer3_baseAddr, #IRQ_ENABLE_SET]
+ 149              		
+ 150              		@ Set count value in TLDR and TCRR
+ 151 00a8 7FBCE0E3 		LDR temp1, =TIMER_COUNTER_VAL
+ 152 00ac 40B086E5 		STR temp1, [timer3_baseAddr, #TLDR]
+ 153 00b0 3CB086E5 		STR temp1, [timer3_baseAddr, #TCRR]
+ 154              	
+ 155 00b4 4CA09FE5 		LDR bFlag, =blinkFlag  @ Load pointer for flag
+ 156 00b8 4C809FE5 		LDR ledToSet, =ledFlag @ load pointer for which LED is to be adjusted
+ 157 00bc 00B0A0E3 		MOV temp1, #0x0
+ 158 00c0 00B08AE5 		STR temp1, [bFlag]
+ 159 00c4 00B088E5 		STR temp1, [ledToSet]
+ 160              		
+ 161              		@ Enable IRQ in CPSR
+ 162 00c8 00B00FE1 		MRS temp1, CPSR
+ 163 00cc 80B0CBE3 		BIC temp1, #0x80
+ 164 00d0 0BF021E1 		MSR CPSR_c, temp1
+ 165              	
+ 166              	WAIT_LOOP: @ Wait for interupt by button press and execute proper code
+ 167 00d4 00909AE5 		LDR bValue, [bFlag]
+ 168 00d8 000059E3 		CMP bValue, #0x0
+ 169 00dc FEFFFF0B 		BLEQ _stop_blink
+ 170 00e0 FEFFFF1B 		BLNE _blink_sequence
+ 171 00e4 FAFFFFEA 		B WAIT_LOOP	
+ARM GAS  ../project2_P3_main.s 			page 4
+
+
+ 172              	
+ 173              	.data
+ 174              	.align 2
+ 175 0000 00000000 		blinkFlag: .word 0x0
+ 176 0004 00000000 		ledFlag:   .word 0x0
+ 177              	
+ 178              	.align 2
+ 179              		SVC_STACK:
+ 180              			.rept 1024
+ 181              				.word 0x0000
+ 182 0008 00000000 			.endr
+ 182      00000000 
+ 182      00000000 
+ 182      00000000 
+ 182      00000000 
+ 183              		IRQ_STACK:
+ 184              			.rept 1024
+ 185              				.word 0x0000
+ 186 1008 00000000 			.endr
+ 186      00000000 
+ 186      00000000 
+ 186      00000000 
+ 186      00000000 
+ 187              	.end...
+ARM GAS  ../project2_P3_main.s 			page 5
+
+
+DEFINED SYMBOLS
+../project2_P3_main.s:22     .text:00000000 _start
+../project2_P3_main.s:24     *ABS*:00000002 GPIO1_CLK_ENABLE
+../project2_P3_main.s:25     *ABS*:44e000ac GPIO1_CLK_CTRL
+../project2_P3_main.s:26     *ABS*:44e00084 TIMER3_CLK_CTRL
+../project2_P3_main.s:27     *ABS*:44e0050c TIMER3_CLKSEL
+../project2_P3_main.s:30     *ABS*:4804c000 GPIO1_BASE
+../project2_P3_main.s:31     *ABS*:00000134 GPIO_OE
+../project2_P3_main.s:32     *ABS*:00000190 GPIO_CLEAR_DATA_OUT
+../project2_P3_main.s:33     *ABS*:00000194 GPIO_SET_DATA_OUT
+../project2_P3_main.s:34     *ABS*:0000014c GPIO_FALLING_DETECT
+../project2_P3_main.s:35     *ABS*:0000002c GPIO_IRQ_STAT_0
+../project2_P3_main.s:36     *ABS*:00000034 GPIO_IRQ_STAT_SET_0
+../project2_P3_main.s:39     *ABS*:48200000 INTC_BASE
+../project2_P3_main.s:40     *ABS*:00000048 INTC_CONTROL
+../project2_P3_main.s:41     *ABS*:00000010 INTC_CONFIG
+../project2_P3_main.s:42     *ABS*:000000c8 INTC_MIR_CLEAR2
+../project2_P3_main.s:43     *ABS*:000000e8 INTC_MIR_CLEAR3
+../project2_P3_main.s:44     *ABS*:000000ec INTC_MIR_SET3
+../project2_P3_main.s:45     *ABS*:000000f8 INTC_PENDING_IRQ3
+../project2_P3_main.s:46     *ABS*:00000004 GPIOINT1A
+../project2_P3_main.s:47     *ABS*:00000020 TINT3
+../project2_P3_main.s:50     *ABS*:48042000 TIMER3_BASE
+../project2_P3_main.s:51     *ABS*:00000010 TIOCP_CFG
+../project2_P3_main.s:52     *ABS*:0000002c IRQ_ENABLE_SET
+../project2_P3_main.s:53     *ABS*:00000038 TCLR
+../project2_P3_main.s:54     *ABS*:0000003c TCRR
+../project2_P3_main.s:55     *ABS*:00000040 TLDR
+../project2_P3_main.s:56     *ABS*:ffff80ff TIMER_COUNTER_VAL
+../project2_P3_main.s:59     *ABS*:fe1fffff SET_ALL_LED_OUTPUT
+../project2_P3_main.s:60     *ABS*:01e00000 SET_ALL_LED
+../project2_P3_main.s:73     .text:00000000 INIT_STACKS
+../project2_P3_main.s:179    .data:00000008 SVC_STACK
+../project2_P3_main.s:74     .text:00000000 $a
+../project2_P3_main.s:183    .data:00001008 IRQ_STACK
+../project2_P3_main.s:82     .text:00000018 INIT_GPIO
+../project2_P3_main.s:101    .text:00000044 INIT_INT
+../project2_P3_main.s:125    .text:00000078 INIT_TIMER
+../project2_P3_main.s:175    .data:00000000 blinkFlag
+../project2_P3_main.s:176    .data:00000004 ledFlag
+../project2_P3_main.s:166    .text:000000d4 WAIT_LOOP
+../project2_P3_main.s:174    .data:00000000 $d
+../project2_P3_main.s:173    .text:000000e8 $d
+                   .debug_aranges:0000000c $d
+
+UNDEFINED SYMBOLS
+_stop_blink
+_blink_sequence

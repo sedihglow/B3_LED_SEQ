@@ -1,0 +1,159 @@
+ARM GAS  ../project2_P1_main.s 			page 1
+
+
+   1              	@ Filename: project2_P1_main.s
+   2              	@ This program will utilize the USER LED's to blink in a specified pattern
+   3              	@
+   4              	@ GPIO banks and pins used:
+   5              	@ GPIO1 base address = 0x4804 | end address = 0x4804CFFF
+   6              	@ GPIO1_21 = LED 0 | proc pin = V15
+   7              	@ GPIO1_22 = LED 1 | proc pin = U15
+   8              	@ GPIO1_23 = LED 2 | proc pin = T15
+   9              	@ GPIO1_24 = LED 3 | proc pin = V16
+  10              	@ 
+  11              	@ Cycle through the LED's, blinking each one for 1second a piece, rotating
+  12              	@ through LED[0-3].
+  13              	@ Board: Beagle Bone Black
+  14              	@ Written by: James Ross
+  15              	
+  16              	
+  17              	.text
+  18              	.global _start
+  19              	_start:
+  20              	.equ GPIO1_CLK_CTRL,       0x44E000AC @ CM_PER_GPIO1_CLKCTRL register address
+  21              	.equ GPIO1_CLK_ENABLE,     0x00000002 @ Enable GPIO1 clk at CM_PER_GPIO_CLKCTRL
+  22              	.equ GPIO1_OE, 			   0x134 	  @ GPIO_OE register offset
+  23              	.equ GPIO1_CLEAR_DATA_OUT, 0x190 	  @ GPIO_CLEARDATAOUT register offset
+  24              	.equ GPIO1_SET_DATA_OUT,   0x194 	  @ GPIO_SETDATAOUT register offset
+  25              	.equ GPIO1_BASE,		   0x4804C000 @ GPIO1 base address
+  26              	
+  27              	.equ SET_ALL_LED_OUTPUT,   0xFE1FFFFF @ Mask to set LED[0-3] as outputs
+  28              	
+  29              	
+  30              	.equ SET_ALL_LED, 0x01E00000		  @ Mask to set all LED's output
+  31              	.equ SET_LED0,    0x00200000 		  @ Mask to set LED0
+  32              	.equ SET_LED1,	  0x00400000		  @ Mask to set LED1
+  33              	.equ SET_LED2,	  0x00800000		  @ Mask to set LED2
+  34              	.equ SET_LED3,	  0x01000000	      @ Mask to set LED3
+  35              	
+  36              	.equ HIGH, 		  0x1
+  37              	.equ LOW,		  0x0
+  38              	
+  39              	gpio1_baseAddr .req R3
+  40              	temp1 .req R11 @ scratch register 1
+  41              	temp2 .req R12 @ screach register 2
+  42              	stack .req R13
+  43              	
+  44              	
+  45 0000 A0D09FE5 		LDR stack,=STACK	    	@ stack pointer
+  46 0004 01DC8DE2 		ADD stack, stack, #0x100	@ Point to top of stack, 256 = 0x100
+  47              		
+  48              	INIT_GPIO:
+  49              		@ Set clock to GPIO1 as enabled
+  50 0008 02B0A0E3 		MOV temp1, #GPIO1_CLK_ENABLE
+  51 000c 98C09FE5 		LDR temp2, =GPIO1_CLK_CTRL
+  52 0010 00B08CE5 		STR temp1, [temp2]
+  53              	
+  54              		@ Set GPIO1_[21-24] as outputs, desired initial output is 0
+  55 0014 94309FE5 		LDR gpio1_baseAddr, =GPIO1_BASE
+  56              		
+  57 0018 19BE83E2 		ADD temp1, gpio1_baseAddr, #GPIO1_CLEAR_DATA_OUT
+ARM GAS  ../project2_P1_main.s 			page 2
+
+
+  58 001c 1EC6A0E3 		MOV temp2, #SET_ALL_LED
+  59 0020 00C08BE5 		STR temp2, [temp1]
+  60              	
+  61              		@ Enable GPIO1_[21-24]
+  62 0024 4DBF83E2 		ADD temp1, gpio1_baseAddr, #GPIO1_OE
+  63 0028 1EC6E0E3 		MOV temp2, #SET_ALL_LED_OUTPUT
+  64 002c 00409BE5 		LDR R4, [temp1]     @ Load
+  65 0030 0C4004E0 		AND R4, R4, temp2	@ Modify to enable LED[0-3] as outputs
+  66 0034 00408BE5 		STR R4, [temp1]		@ Store
+  67              	
+  68              	BLINK_LOOP:
+  69              		
+  70 0038 0216A0E3 		MOV R1, #SET_LED0
+  71 003c 0120A0E3 		MOV R2, #HIGH
+  72 0040 FEFFFFEB 		BL _GPIO1_toggleLED 	@ toggle LED0 high
+  73              		
+  74 0044 FEFFFFEB 		BL _delaySecond
+  75              	
+  76 0048 0020A0E3 		MOV R2, #LOW
+  77 004c FEFFFFEB 		BL _GPIO1_toggleLED	    @ toggle LED0 low
+  78              	
+  79              		
+  80 0050 0115A0E3 		MOV R1, #SET_LED1
+  81 0054 0120A0E3 		MOV R2, #HIGH			
+  82 0058 FEFFFFEB 		BL _GPIO1_toggleLED 	@ toggle LED1 high
+  83              		
+  84 005c FEFFFFEB 		BL _delaySecond
+  85              		
+  86 0060 0115A0E3 		MOV R1, #SET_LED1
+  87 0064 0020A0E3 		MOV R2, #LOW
+  88 0068 FEFFFFEB 		BL _GPIO1_toggleLED 	@ toggle LED1 low 
+  89              		
+  90 006c 0215A0E3 		MOV R1, #SET_LED2
+  91 0070 0120A0E3 		MOV R2, #HIGH
+  92 0074 FEFFFFEB 		BL _GPIO1_toggleLED 	@ toggle LED2 high
+  93              		
+  94 0078 FEFFFFEB 		BL _delaySecond
+  95              		
+  96 007c 0215A0E3 		MOV R1, #SET_LED2
+  97 0080 0020A0E3 		MOV R2, #LOW
+  98 0084 FEFFFFEB 		BL _GPIO1_toggleLED 	@ toggle LED2 low
+  99              		
+ 100              		
+ 101 0088 0114A0E3 		MOV R1, #SET_LED3
+ 102 008c 0120A0E3 		MOV R2, #HIGH
+ 103 0090 FEFFFFEB 		BL _GPIO1_toggleLED 	@ toggle LED3 high
+ 104              		
+ 105 0094 FEFFFFEB 		BL _delaySecond
+ 106              		
+ 107 0098 0114A0E3 		MOV R1, #SET_LED3
+ 108 009c 0020A0E3 		MOV R2, #LOW
+ 109 00a0 FEFFFFEB 		BL _GPIO1_toggleLED 	@ toggle LED3 low
+ 110              		
+ 111 00a4 E3FFFFEA 		B BLINK_LOOP
+ 112              	.data
+ 113              		STACK:
+ 114              			.rept 256
+ARM GAS  ../project2_P1_main.s 			page 3
+
+
+ 115              				.byte 0x00
+ 116 0000 00000000 			.endr
+ 116      00000000 
+ 116      00000000 
+ 116      00000000 
+ 116      00000000 
+ 117              	.end...
+ARM GAS  ../project2_P1_main.s 			page 4
+
+
+DEFINED SYMBOLS
+../project2_P1_main.s:19     .text:00000000 _start
+../project2_P1_main.s:20     *ABS*:44e000ac GPIO1_CLK_CTRL
+../project2_P1_main.s:21     *ABS*:00000002 GPIO1_CLK_ENABLE
+../project2_P1_main.s:22     *ABS*:00000134 GPIO1_OE
+../project2_P1_main.s:23     *ABS*:00000190 GPIO1_CLEAR_DATA_OUT
+../project2_P1_main.s:24     *ABS*:00000194 GPIO1_SET_DATA_OUT
+../project2_P1_main.s:25     *ABS*:4804c000 GPIO1_BASE
+../project2_P1_main.s:27     *ABS*:fe1fffff SET_ALL_LED_OUTPUT
+../project2_P1_main.s:30     *ABS*:01e00000 SET_ALL_LED
+../project2_P1_main.s:31     *ABS*:00200000 SET_LED0
+../project2_P1_main.s:32     *ABS*:00400000 SET_LED1
+../project2_P1_main.s:33     *ABS*:00800000 SET_LED2
+../project2_P1_main.s:34     *ABS*:01000000 SET_LED3
+../project2_P1_main.s:36     *ABS*:00000001 HIGH
+../project2_P1_main.s:37     *ABS*:00000000 LOW
+../project2_P1_main.s:113    .data:00000000 STACK
+../project2_P1_main.s:45     .text:00000000 $a
+../project2_P1_main.s:48     .text:00000008 INIT_GPIO
+../project2_P1_main.s:68     .text:00000038 BLINK_LOOP
+../project2_P1_main.s:112    .text:000000a8 $d
+                   .debug_aranges:0000000c $d
+
+UNDEFINED SYMBOLS
+_GPIO1_toggleLED
+_delaySecond

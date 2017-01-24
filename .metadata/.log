@@ -1,0 +1,1218 @@
+!SESSION 2016-12-03 09:42:29.677 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.equinox.event 4 0 2016-12-03 09:42:36.375
+!MESSAGE Exception while dispatching event org.osgi.service.event.Event [topic=org/eclipse/e4/ui/model/application/ApplicationElement/tags/ADD] to handler org.eclipse.e4.ui.services.internal.events.UIEventHandler@8bb0f8
+!STACK 0
+java.lang.IllegalArgumentException: 
+	at org.eclipse.core.runtime.Assert.isLegal(Assert.java:63)
+	at org.eclipse.core.runtime.Assert.isLegal(Assert.java:47)
+	at org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.findElementsRecursive(ModelServiceImpl.java:286)
+	at org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.findElements(ModelServiceImpl.java:371)
+	at org.eclipse.e4.ui.internal.workbench.ModelServiceImpl.getActivePerspective(ModelServiceImpl.java:1071)
+	at org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon.maximize(MinMaxAddon.java:591)
+	at org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon$8.handleEvent(MinMaxAddon.java:391)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler$1.run(UIEventHandler.java:41)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:180)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:150)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4688)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:205)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:38)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:80)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:58)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+	at org.eclipse.emf.ecore.util.EcoreEList.dispatchNotification(EcoreEList.java:249)
+	at org.eclipse.emf.common.notify.impl.NotifyingListImpl.addUnique(NotifyingListImpl.java:304)
+	at org.eclipse.emf.common.util.AbstractEList.add(AbstractEList.java:301)
+	at org.eclipse.ui.internal.WorkbenchIntroManager.setIntroStandby(WorkbenchIntroManager.java:205)
+	at org.eclipse.ui.internal.WorkbenchIntroManager.showIntro(WorkbenchIntroManager.java:141)
+	at org.eclipse.ui.application.WorkbenchWindowAdvisor.openIntro(WorkbenchWindowAdvisor.java:190)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchWindowAdvisor.openIntro(IDEWorkbenchWindowAdvisor.java:564)
+	at org.eclipse.ui.internal.WorkbenchWindow.setup(WorkbenchWindow.java:696)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:877)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.inject(InjectorImpl.java:119)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.inject(InjectorImpl.java:84)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.inject(ContextInjectionFactory.java:73)
+	at org.eclipse.ui.internal.Workbench.createWorkbenchWindow(Workbench.java:1396)
+	at org.eclipse.ui.internal.Workbench.getActiveWorkbenchWindow(Workbench.java:1369)
+	at org.eclipse.ui.internal.services.WorkbenchSourceProvider.updateActiveShell(WorkbenchSourceProvider.java:924)
+	at org.eclipse.ui.internal.services.WorkbenchSourceProvider.getCurrentState(WorkbenchSourceProvider.java:133)
+	at org.eclipse.ui.internal.services.WorkbenchSourceProvider$6.handleEvent(WorkbenchSourceProvider.java:684)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.filterEvent(Display.java:1262)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1056)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1081)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Decorations.WM_ACTIVATE(Decorations.java:1667)
+	at org.eclipse.swt.widgets.Shell.WM_ACTIVATE(Shell.java:2151)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4608)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:340)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1627)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2075)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4977)
+	at org.eclipse.swt.internal.win32.OS.BringWindowToTop(Native Method)
+	at org.eclipse.swt.widgets.Decorations.bringToTop(Decorations.java:231)
+	at org.eclipse.swt.widgets.Shell.open(Shell.java:1217)
+	at org.eclipse.e4.ui.workbench.renderers.swt.WBWRenderer.postProcess(WBWRenderer.java:767)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:649)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeCreateGui(PartRenderingEngine.java:735)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$2(PartRenderingEngine.java:706)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$7.run(PartRenderingEngine.java:700)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.createGui(PartRenderingEngine.java:685)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1038)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:997)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:138)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:610)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:567)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:354)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:181)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-12-03 09:44:27.747
+!MESSAGE Indexed 'hw4Tutorial' (0 sources, 0 headers) in 0.01 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-12-03 09:44:28.802
+!MESSAGE Indexed 'project1_F2C' (0 sources, 0 headers) in 0.00 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-12-03 09:44:28.843
+!MESSAGE Indexed 'project2_P1_LED' (0 sources, 0 headers) in 0.01 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-12-03 09:44:28.851
+!MESSAGE Indexed 'project2_P2_INT' (0 sources, 0 headers) in 0.00 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+!SESSION 2016-12-03 10:13:25.535 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-03 10:21:15.555
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-03 10:21:15.623
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-03 11:07:14.946
+!MESSAGE DS_ERROR: M3_wakeupSS: Error connecting to the target: (Error -1266 @ 0x0) Device is held in reset. Take the device out of reset, and retry the operation. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-03 11:07:14.973
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -1266 @ 0x0)
+Device is held in reset. Take the device out of reset, and retry the operation.
+(Emulation package 5.1.507.0)
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-03 11:07:20.365
+!MESSAGE DS_ERROR: CS_DAP_M3: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-03 11:07:20.469
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+!SESSION 2016-12-05 10:12:03.227 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-05 10:40:52.464
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction the files to be unzipped is not here
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-05 10:40:52.477
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction error unzipping zipfile: C:\ti\ccsv6\eclipse\downloads\xdctools_3_30_03_47_core_win32_nojre.zipdestination: C:\ti\ccsv6\eclipse/../..
+!SESSION 2016-12-05 10:41:02.419 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-05 10:48:02.132
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-05 10:48:02.246
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+!SESSION 2016-12-05 15:03:52.213 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-05 15:06:23.633
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction the files to be unzipped is not here
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-05 15:06:23.642
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction error unzipping zipfile: C:\ti\ccsv6\eclipse\downloads\xdctools_3_30_03_47_core_win32_nojre.zipdestination: C:\ti\ccsv6\eclipse/../..
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-12-05 15:39:20.772
+!MESSAGE Indexed 'project2_P3_Timer' (0 sources, 0 headers) in 0.00 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+!SESSION 2016-12-05 16:27:39.926 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-05 21:15:40.515
+!MESSAGE Request for monitor: 'RequestMonitor (com.ti.ccstudio.debug.service.RunControl$4@99b734): Status ERROR: com.ti.ccstudio.debug code=10004 Source file not found null' resulted in an error.
+!SUBENTRY 1 com.ti.ccstudio.debug 4 10004 2016-12-05 21:15:40.515
+!MESSAGE Source file not found
+
+!ENTRY org.eclipse.core.resources 4 1 2016-12-06 02:46:06.467
+!MESSAGE Problems occurred refreshing resources
+!SUBENTRY 1 org.eclipse.core.resources 4 1 2016-12-06 02:46:06.467
+!MESSAGE Problem finding next change, code: 64
+
+!ENTRY org.eclipse.core.resources 4 1 2016-12-06 03:15:27.288
+!MESSAGE Problems occurred refreshing resources
+!SUBENTRY 1 org.eclipse.core.resources 4 1 2016-12-06 03:15:27.288
+!MESSAGE Problem finding next change, code: 995
+
+!ENTRY org.eclipse.core.resources 4 1 2016-12-06 03:15:30.358
+!MESSAGE Problems occurred refreshing resources
+!SUBENTRY 1 org.eclipse.core.resources 4 1 2016-12-06 03:15:30.358
+!MESSAGE Problem finding next change, code: 995
+
+!ENTRY org.eclipse.core.resources 4 1 2016-12-06 03:15:33.420
+!MESSAGE Problems occurred refreshing resources
+!SUBENTRY 1 org.eclipse.core.resources 4 1 2016-12-06 03:15:33.420
+!MESSAGE Problem finding next change, code: 995
+
+!ENTRY org.eclipse.core.resources 4 1 2016-12-06 07:56:25.591
+!MESSAGE Problems occurred refreshing resources
+!SUBENTRY 1 org.eclipse.core.resources 4 1 2016-12-06 07:56:25.591
+!MESSAGE Problem finding next change, code: 64
+!SESSION 2016-12-06 08:33:49.314 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-12-06 08:33:57.131
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2016-12-06 12:34:25.678 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2016-12-06 12:36:53.260
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2016-12-06 12:36:53.260
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.260
+!MESSAGE Software being installed: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.260
+!MESSAGE Missing requirement: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0) requires 'org.eclipse.jdt.ui 3.5.1' but it could not be found
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2016-12-06 12:36:53.270
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2016-12-06 12:36:53.270
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.270
+!MESSAGE Software being installed: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.270
+!MESSAGE Missing requirement: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0) requires 'org.eclipse.jdt.ui 3.5.1' but it could not be found
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2016-12-06 12:36:53.308
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2016-12-06 12:36:53.308
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.308
+!MESSAGE Software being installed: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.308
+!MESSAGE Missing requirement: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0) requires 'org.eclipse.jdt.ui 3.5.1' but it could not be found
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2016-12-06 12:36:53.313
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2016-12-06 12:36:53.313
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.313
+!MESSAGE Software being installed: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2016-12-06 12:36:53.313
+!MESSAGE Missing requirement: Vrapper - Java Extensions (Optional, requires JDT) 0.70.0 (net.sourceforge.vrapper.eclipse.jdt.feature.feature.group 0.70.0) requires 'org.eclipse.jdt.ui 3.5.1' but it could not be found
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-06 12:37:45.453
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction the files to be unzipped is not here
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-06 12:37:45.458
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction error unzipping zipfile: C:\ti\ccsv6\eclipse\downloads\xdctools_3_30_03_47_core_win32_nojre.zipdestination: C:\ti\ccsv6\eclipse/../..
+!SESSION 2016-12-06 12:38:06.779 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-06 12:47:12.253
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-06 12:47:12.349
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+
+!ENTRY net.sourceforge.vrapper.eclipse 4 0 2016-12-06 14:00:22.004
+!MESSAGE Command not handled: org.eclipse.ui.navigate.forwardHistory
+!STACK 0
+org.eclipse.core.commands.NotEnabledException: Trying to execute the disabled command org.eclipse.ui.navigate.forwardHistory
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:490)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:508)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceImpl.executeHandler(HandlerServiceImpl.java:213)
+	at org.eclipse.ui.internal.handlers.LegacyHandlerService.executeCommand(LegacyHandlerService.java:420)
+	at net.sourceforge.vrapper.eclipse.commands.EclipseCommand.executeAction(EclipseCommand.java:79)
+	at net.sourceforge.vrapper.eclipse.commands.EclipseCommand.doIt(EclipseCommand.java:67)
+	at net.sourceforge.vrapper.eclipse.commands.EclipseCommand.execute(EclipseCommand.java:32)
+	at net.sourceforge.vrapper.vim.commands.CommandWrappers$1.execute(CommandWrappers.java:23)
+	at net.sourceforge.vrapper.vim.modes.CommandBasedMode.executeCommand(CommandBasedMode.java:262)
+	at net.sourceforge.vrapper.vim.modes.CommandBasedMode.handleKey(CommandBasedMode.java:316)
+	at net.sourceforge.vrapper.vim.DefaultEditorAdaptor.handleKey0(DefaultEditorAdaptor.java:799)
+	at net.sourceforge.vrapper.vim.DefaultEditorAdaptor.handleKeyOffRecord(DefaultEditorAdaptor.java:460)
+	at net.sourceforge.vrapper.vim.DefaultEditorAdaptor.handleKey(DefaultEditorAdaptor.java:435)
+	at net.sourceforge.vrapper.eclipse.interceptor.VimInputInterceptorFactory$VimInputInterceptor.verifyKey(VimInputInterceptorFactory.java:290)
+	at org.eclipse.jface.text.TextViewer$VerifyKeyListenersManager.verifyKey(TextViewer.java:491)
+	at org.eclipse.swt.custom.StyledTextListener.handleEvent(StyledTextListener.java:65)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1057)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1081)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:778)
+	at org.eclipse.swt.custom.StyledText.handleKeyDown(StyledText.java:5954)
+	at org.eclipse.swt.custom.StyledText$7.handleEvent(StyledText.java:5636)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1057)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1081)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1108)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1104)
+	at org.eclipse.swt.widgets.Widget.wmChar(Widget.java:1525)
+	at org.eclipse.swt.widgets.Control.WM_CHAR(Control.java:4723)
+	at org.eclipse.swt.widgets.Canvas.WM_CHAR(Canvas.java:344)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4611)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:340)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4977)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2549)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3757)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1113)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:997)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:138)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:610)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:567)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:354)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:181)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:636)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:591)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1450)
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-06 17:16:44.394
+!MESSAGE DS_ERROR: IcePick_D_0: Error: (Error -150 @ 0x0) One of the FTDI driver functions used during configuration returned a invalid status or an error. (Emulation package 5.1.507.0) 
+
+!SESSION 2016-12-07 09:32:03.290 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-07 09:33:49.184
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction the files to be unzipped is not here
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-07 09:33:49.190
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction error unzipping zipfile: C:\ti\ccsv6\eclipse\downloads\xdctools_3_30_03_47_core_win32_nojre.zipdestination: C:\ti\ccsv6\eclipse/../..
+!SESSION 2016-12-07 09:33:58.181 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 13:30:52.758
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 13:30:52.877
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 13:33:50.636
+!MESSAGE DS_ERROR: CortxA8: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 14:18:37.366
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 14:18:37.402
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 14:22:05.475
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 14:22:05.490
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 14:25:25.115
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 14:25:25.132
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 14:59:58.575
+!MESSAGE DS_ERROR: IcePick_D_0: Error: (Error -150 @ 0x0) One of the FTDI driver functions used during configuration returned a invalid status or an error. (Emulation package 5.1.507.0) 
+
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:36:15.312
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Database.markFileIncomplete(Database.java:775)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:738)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:507)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.markFileIncomplete(Database.java:773)
+	... 10 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:36:15.312
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.markFileIncomplete(Database.java:773)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:738)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:507)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:36:15.337
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:567)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 10 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:36:15.337
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:567)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:36:15.342
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1408)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:185)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:570)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 9 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:36:15.342
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1408)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:185)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:570)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:41:40.363
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:507)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 10 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:41:40.363
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:507)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:41:40.376
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:567)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 10 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:41:40.376
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:567)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:41:40.381
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1408)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:185)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:570)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 9 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:41:40.381
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1408)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:185)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:570)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:41:41.392
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:507)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 10 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:41:41.393
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:507)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:41:41.400
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:567)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 10 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:41:41.400
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.giveUpExclusiveLock(Database.java:700)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.releaseWriteLock(PDOM.java:1038)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:142)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.releaseWriteLock(WritableCIndex.java:126)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.setResume(AbstractIndexerTask.java:589)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:567)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.core 4 0 2016-12-07 15:41:41.405
+!MESSAGE Error: IOException
+!STACK 1
+org.eclipse.core.runtime.CoreException: IOException
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:54)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1408)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:185)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:570)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	... 9 more
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2016-12-07 15:41:41.406
+!MESSAGE IOException
+!STACK 0
+java.io.IOException: An unexpected network error occurred
+	at sun.nio.ch.FileDispatcher.pwrite0(Native Method)
+	at sun.nio.ch.FileDispatcher.pwrite(Unknown Source)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.write(Unknown Source)
+	at sun.nio.ch.FileChannelImpl.write(Unknown Source)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.write(Database.java:166)
+	at org.eclipse.cdt.internal.core.pdom.db.Chunk.flush(Chunk.java:52)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flushAndUnlockChunks(Database.java:743)
+	at org.eclipse.cdt.internal.core.pdom.db.Database.flush(Database.java:730)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.flush(PDOM.java:1408)
+	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.flush(WritablePDOM.java:185)
+	at org.eclipse.cdt.internal.core.index.WritableCIndex.flush(WritableCIndex.java:166)
+	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:570)
+	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:141)
+	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:137)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 15:44:07.996
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 15:44:08.011
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 15:48:29.587
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 15:48:29.620
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 15:48:44.172
+!MESSAGE DS_ERROR: CortxA8: GEL: Error while executing OnTargetConnect(): Target failed to read 0x44E10040 	at (*((unsigned int *) (0x44E10000+0x40))>>22) [beagleboneblack.gel:362] 	at GetInputClockFrequency() [beagleboneblack.gel:433] 	at ARM_OPP100_Config() [beagleboneblack.gel:353] 	at AM335x_BeagleBlack_Initialization() [beagleboneblack.gel:339] 	at OnTargetConnect() .
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 15:48:55.492
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 15:48:55.508
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 16:03:23.467
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 16:03:23.514
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 16:29:31.602
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU: (Error -180 @ 0xFFFFFF4C) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 16:29:31.646
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-07 16:30:05.903
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.DataRequestMonitor@18602c7): Status ERROR: com.ti.ccstudio.debug code=10004 Marker id 140 not found. null' resulted in an error.
+!SUBENTRY 1 com.ti.ccstudio.debug 4 10004 2016-12-07 16:30:05.903
+!MESSAGE Marker id 140 not found.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-07 16:30:05.909
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.DataRequestMonitor@2da1e1): Status ERROR: com.ti.ccstudio.debug code=10004 Marker id 166 not found. null' resulted in an error.
+!SUBENTRY 1 com.ti.ccstudio.debug 4 10004 2016-12-07 16:30:05.909
+!MESSAGE Marker id 166 not found.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-07 16:30:05.915
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.DataRequestMonitor@1dee5f3): Status ERROR: com.ti.ccstudio.debug code=10004 Marker id 149 not found. null' resulted in an error.
+!SUBENTRY 1 com.ti.ccstudio.debug 4 10004 2016-12-07 16:30:05.915
+!MESSAGE Marker id 149 not found.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-07 16:30:05.920
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.DataRequestMonitor@caf61b): Status ERROR: com.ti.ccstudio.debug code=10004 Marker id 165 not found. null' resulted in an error.
+!SUBENTRY 1 com.ti.ccstudio.debug 4 10004 2016-12-07 16:30:05.920
+!MESSAGE Marker id 165 not found.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2016-12-07 16:30:05.925
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.DataRequestMonitor@6b435c): Status ERROR: com.ti.ccstudio.debug code=10004 Marker id 164 not found. null' resulted in an error.
+!SUBENTRY 1 com.ti.ccstudio.debug 4 10004 2016-12-07 16:30:05.925
+!MESSAGE Marker id 164 not found.
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 18:22:23.195
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 18:22:23.217
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 18:26:11.134
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 18:26:11.148
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 18:30:22.375
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-07 18:30:22.387
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+!SESSION 2016-12-08 13:23:01.338 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-08 13:34:59.718
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction the files to be unzipped is not here
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-08 13:34:59.724
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction error unzipping zipfile: C:\ti\ccsv6\eclipse\downloads\xdctools_3_30_03_47_core_win32_nojre.zipdestination: C:\ti\ccsv6\eclipse/../..
+!SESSION 2016-12-08 14:00:17.827 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-08 14:07:11.340
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction the files to be unzipped is not here
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-08 14:07:11.346
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction error unzipping zipfile: C:\ti\ccsv6\eclipse\downloads\xdctools_3_30_03_47_core_win32_nojre.zipdestination: C:\ti\ccsv6\eclipse/../..
+!SESSION 2016-12-08 14:09:08.392 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:18:34.411
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU: (Error -180 @ 0xFFFFFF4C) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:18:34.428
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:18:43.358
+!MESSAGE DS_ERROR: CortxA8: GEL: Error while executing OnTargetConnect(): Target failed to read 0x44E10040 	at (*((unsigned int *) (0x44E10000+0x40))>>22) [beagleboneblack.gel:362] 	at GetInputClockFrequency() [beagleboneblack.gel:433] 	at ARM_OPP100_Config() [beagleboneblack.gel:353] 	at AM335x_BeagleBlack_Initialization() [beagleboneblack.gel:339] 	at OnTargetConnect() .
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:18:50.842
+!MESSAGE DS_ERROR: CortxA8: Trouble Setting Breakpoint with the Action "Semi hosting" at 0x80000048: (Error -1065 @ 0x80000048) Unable to access device memory. Verify that the memory address is in valid memory. If error persists, confirm configuration, power-cycle board, and/or try more reliable JTAG settings (e.g. lower TCLK). (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:18:51.151
+!MESSAGE DS_ERROR: CortxA8: Trouble Writing Memory Block at 0x80000000 on Page 0 of Length 0x238c: (Error -1065 @ 0x80000000) Unable to access device memory. Verify that the memory address is in valid memory. If error persists, confirm configuration, power-cycle board, and/or try more reliable JTAG settings (e.g. lower TCLK). (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:18:51.154
+!MESSAGE DS_ERROR: CortxA8: Trouble Removing Breakpoint with the Action "Semi hosting" at 0x80000048: (Error -2044 @ 0x80000048) Internal error: Requested breakpoint does not exist. Restart the application. If error persists, please report the error. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:18:51.157
+!MESSAGE DS_ERROR: CortxA8: GEL: File: N:\ECE371\project2_P3_Timer\Debug\project2_P3_Timer.out: Load failed.
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:52:52.680
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:52:52.703
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:56:10.430
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 14:56:10.443
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 15:58:50.578
+!MESSAGE DS_ERROR: IcePick_D_0: Power Failure on Target CPU 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 15:58:50.591
+!MESSAGE DS_ERROR: CS_DAP_DebugSS: Power Failure on Target CPU: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 0.0.0.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 15:59:08.312
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-08 15:59:08.350
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+!SESSION 2016-12-09 11:42:43.270 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2016-12-09 11:43:22.044
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.actionSet2
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-09 11:44:51.074
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction the files to be unzipped is not here
+
+!ENTRY org.eclipse.equinox.p2.touchpoint.natives 4 0 2016-12-09 11:44:51.078
+!MESSAGE org.eclipse.equinox.internal.p2.touchpoint.natives.actions.UnzipAction error unzipping zipfile: C:\ti\ccsv6\eclipse\downloads\xdctools_3_30_03_47_core_win32_nojre.zipdestination: C:\ti\ccsv6\eclipse/../..
+!SESSION 2016-12-09 11:54:28.956 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2016-12-09 11:54:35.629
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.actionSet2
+!SESSION 2016-12-09 12:05:50.423 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2016-12-09 12:06:11.362
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.cdt.actionSet2
+!SESSION 2016-12-09 12:07:01.481 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2016-12-09 12:07:06.945
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.cdt.actionSet2
+
+!ENTRY com.ti.ccstudio.debug.server 4 214294189 2016-12-09 12:07:08.282
+!MESSAGE Unexpected CCS exit detected [12/9/16 12:06 PM]!!!
+
+!ENTRY org.eclipse.ui 4 4 2016-12-09 12:07:30.474
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.cdt.actionSet2
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-09 12:07:49.018
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-09 12:07:49.099
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+!SESSION 2016-12-09 12:37:14.430 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2016-12-09 12:37:21.867
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.actionSet2
+
+!ENTRY org.eclipse.core.jobs 4 2 2016-12-09 12:38:45.027
+!MESSAGE An internal error occurred during: "Computing size".
+!STACK 0
+java.lang.IllegalStateException: Profile epp.package.cpp is not current. Expected timestamp 1481315924871 but was 1481313935090.
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry.lockProfile(SimpleProfileRegistry.java:819)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:67)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.internal.p2.ui.ProvUI.getSize(ProvUI.java:235)
+	at org.eclipse.equinox.internal.p2.ui.dialogs.SizeComputingWizardPage$1.run(SizeComputingWizardPage.java:63)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.core.jobs 4 2 2016-12-09 12:38:45.034
+!MESSAGE An internal error occurred during: "Installing Software".
+!STACK 0
+java.lang.IllegalStateException: Profile epp.package.cpp is not current. Expected timestamp 1481315924871 but was 1481313935090.
+	at org.eclipse.equinox.internal.p2.engine.SimpleProfileRegistry.lockProfile(SimpleProfileRegistry.java:819)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:67)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.p2.operations.ProvisioningSession.performProvisioningPlan(ProvisioningSession.java:151)
+	at org.eclipse.equinox.p2.operations.ProfileModificationJob.runModal(ProfileModificationJob.java:79)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.ui 4 4 2016-12-09 12:38:52.497
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.actionSet2
+!SESSION 2016-12-19 13:17:11.894 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2016-12-19 13:17:23.427
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.cdt.actionSet2
+
+!ENTRY org.eclipse.ui 4 4 2016-12-19 13:27:51.334
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.cdt.actionSet2
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-19 13:28:07.519
+!MESSAGE DS_ERROR: IcePick_D_0: Error connecting to the target: (Error -180 @ 0x0) The controller has detected a target power loss. The user must turn-on or connect the power supply for the target. (Emulation package 5.1.507.0) 
+
+
+!ENTRY com.ti.ccstudio.debug 1 0 2016-12-19 13:28:07.643
+!MESSAGE DS_ERROR: Error connecting to the target:
+(Error -180 @ 0x0)
+The controller has detected a target power loss.
+The user must turn-on or connect the power supply for the target.
+(Emulation package 5.1.507.0)
+
+!SESSION 2017-01-19 18:00:40.509 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2017-01-19 18:01:01.946
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.actionSet2
+
+!ENTRY org.eclipse.equinox.p2.engine 4 4 2017-01-19 18:01:20.757
+!MESSAGE An error occurred while collecting items to be installed
+!SUBENTRY 1 org.eclipse.equinox.p2.engine 4 0 2017-01-19 18:01:20.757
+!MESSAGE session context was:(profile=epp.package.cpp, phase=org.eclipse.equinox.internal.p2.engine.phases.Collect, operand=, action=).
+!SUBENTRY 1 org.eclipse.equinox.p2.engine 4 0 2017-01-19 18:01:20.757
+!MESSAGE No artifact repository available.
+!STACK 0
+java.lang.Exception: noArtifactRepositoriesAvailable
+	at org.eclipse.equinox.internal.p2.engine.DownloadManager.start(DownloadManager.java:95)
+	at org.eclipse.equinox.internal.p2.engine.phases.Collect.completePhase(Collect.java:104)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:251)
+	at org.eclipse.equinox.internal.p2.engine.Phase.perform(Phase.java:101)
+	at org.eclipse.equinox.internal.p2.engine.PhaseSet.perform(PhaseSet.java:47)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:75)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:44)
+	at org.eclipse.equinox.p2.operations.ProvisioningSession.performProvisioningPlan(ProvisioningSession.java:151)
+	at org.eclipse.equinox.p2.operations.ProfileModificationJob.runModal(ProfileModificationJob.java:79)
+	at org.eclipse.rtsc.project.core.extdiscovery.ExtensionSiteDiscoveryManager.uninstallFeatures(ExtensionSiteDiscoveryManager.java:636)
+	at org.eclipse.rtsc.project.core.extdiscovery.ExtensionSiteDiscoveryManager.cleanUpDeletedSites(ExtensionSiteDiscoveryManager.java:409)
+	at org.eclipse.rtsc.project.ui.extdiscovery.ExtensionSiteDiscoveryDelegate.cleanUpDeletedSites(ExtensionSiteDiscoveryDelegate.java:81)
+	at org.eclipse.rtsc.project.ui.extdiscovery.ExtensionSiteDiscoveryDelegate.access$0(ExtensionSiteDiscoveryDelegate.java:80)
+	at org.eclipse.rtsc.project.ui.extdiscovery.ExtensionSiteDiscoveryDelegate$1.run(ExtensionSiteDiscoveryDelegate.java:46)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+!SESSION 2017-01-23 17:51:52.800 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_13
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product com.ti.ccstudio.branding.product -data N:\ECE371 -product com.ti.ccstudio.branding.product
+
+!ENTRY org.eclipse.ui 4 4 2017-01-23 17:51:57.060
+!MESSAGE Unable to find Action Set: org.eclipse.rtsc.xdctools.ui.actionSet2
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2017-01-23 17:52:36.856
+!MESSAGE No repository found at file:/c:/ti/xdctools_3_31_03_43_core/.

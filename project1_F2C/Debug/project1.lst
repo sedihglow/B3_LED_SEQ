@@ -1,0 +1,96 @@
+ARM GAS  ../project1_divWsub.s 			page 1
+
+
+   1              	@ File: project1_divWsub.s
+   2              	@ Prodecure to divide by subtraction with a rounded result.
+   3              	@ Written by: James Ross
+   4              	
+   5              	.text
+   6              	.global _divWsub
+   7              	
+   8              	@ Passed inputs
+   9              	@ _divWsub, R1 - numerator
+  10              	@			R2 - denominator
+  11              	@ 			R0 - Result of division to returned
+  12              	_divWsub:
+  13              	.equ ERROR, 0xFFFFFFFF
+  14 0000 0000E003 		MOVEQ R0, #0xFFFFFFFF	 @ Set error flag for return
+  15 0004 F0412DE9 		STMFD R13!, {R4-R8, R14} @ Push, start function
+  16              		subCnt .req R0			 @ Count of subtractions stored in R3 for return
+  17              		numer  .req R1			 @ Numerator to be subtracted from
+  18              		denom  .req R2			 @ Denominator to subtract by
+  19              		t2rem  .req R4			 @ Holds the remainder*2 for compare
+  20              		toComp .req R5			 @ Holds the negetive input to two's compliment
+  21              		negResFlag .req R6 		 @ Flag to flip resulting subCnt,
+  22              								 @ no negate == 0, negate == 0
+  23              		
+  24 0008 0000A0E3 		MOV subCnt, #0x00        @ Initialize locals
+  25 000c 0060A0E3 		MOV negResFlag, #0x00
+  26 0010 0040A0E3 		MOV t2rem, #0x00
+  27              	
+  28              	NUMER_CHECK:
+  29 0014 000051E3 		CMP numer, #0x00     		@ IF numerator >= 0
+  30 0018 030000AA 		BGE DENOM_CHECK				@ Jump to subtraction loop
+  31 001c 0150A0E1 		MOV toComp, numer  			@ Send to register to compliment
+  32 0020 170000EB 		BL TWO_COMP					@ Twos compliment the value
+  33 0024 0510A0E1 		MOV numer, toComp  			@ Save value in numerator
+  34 0028 0160A0E3 		MOV negResFlag, #0x01		@ Set negetive flag
+  35              	
+  36              	DENOM_CHECK:	
+  37 002c 000052E3 		CMP denom, #0x00
+  38 0030 0000E003 		MOVEQ R0, #ERROR 			@ Set error flag for return
+  39 0034 1100000A 		BEQ END						@ IF denom == 0, return error
+  40 0038 050000CA 		BGT DWS_LOOP			   	@ Jump to subtraction loop
+  41 003c 0250A0E1 		MOV toComp, denom			@ ELSE send to register to compliment
+  42 0040 0F0000EB 		BL TWO_COMP				    @ Twos compliment the value
+  43 0044 0520A0E1 		MOV denom, toComp			@ Set denom to result
+  44              		
+  45 0048 010056E3 		CMP negResFlag, #0x01		@ IF numerator < 0 && denominator < 0
+  46 004c 0060A003 		MOVEQ negResFlag, #0x00		@ Do not return a negetive result
+  47 0050 0160A013 		MOVNE negResFlag, #0x01		@ ELSE return negetive result
+  48              		
+  49              	DWS_LOOP:			 			@ while(num >= denom), divide with sub
+  50 0054 020051E1 		CMP	numer, denom 		    @ IF numer is >= denom
+  51 0058 010080A2 		ADDGE subCnt, subCnt, #1	@ Increase subtraction count
+  52 005c 021041A0 		SUBGE numer, numer, denom   @ Subtract denom from numerator
+  53 0060 FBFFFFAA 		BGE DWS_LOOP
+  54              		
+  55              	REMAINDER_CHECK:
+  56 0064 8140A0E1 		MOV t2rem, numer, LSL #1 	@ multiply remainder in numer by 2
+  57 0068 040052E1 		CMP denom, t2rem			@ IF denom is LE t2rem
+ARM GAS  ../project1_divWsub.s 			page 2
+
+
+  58 006c 010080D2 		ADDLE subCnt, subCnt, #1	@ Round result up by 1 
+  59              		
+  60 0070 010056E3 		CMP negResFlag, #0x01		@ IF negResFlag == 0x01
+  61 0074 0050A001 		MOVEQ toComp, subCnt		@ Change result to negetive before return 
+  62 0078 0100000B 		BLEQ TWO_COMP
+  63 007c 0500A001 		MOVEQ subCnt, toComp
+  64              	END:
+  65 0080 F081BDE8 		LDMFD R13!, {R4-R8, PC}  	@ Pop, End function
+  66              		
+  67              	TWO_COMP: @ Twos compliment toComp, register 6
+  68              		.equ MASK, 0xFFFFFFFF	    @ Bit mask for 32-bit register
+  69 0084 00B0E0E3 		MOV R11, #MASK
+  70 0088 0B5025E0 		EOR	toComp, toComp, R11     
+  71 008c 015085E2 		ADD toComp, toComp, #0x01   
+  72 0090 0EF0A0E1 		MOV PC, R14					@ Return to procedure
+  73              	.end...
+ARM GAS  ../project1_divWsub.s 			page 3
+
+
+DEFINED SYMBOLS
+../project1_divWsub.s:12     .text:00000000 _divWsub
+../project1_divWsub.s:13     *ABS*:ffffffff ERROR
+../project1_divWsub.s:14     .text:00000000 $a
+../project1_divWsub.s:28     .text:00000014 NUMER_CHECK
+../project1_divWsub.s:36     .text:0000002c DENOM_CHECK
+../project1_divWsub.s:67     .text:00000084 TWO_COMP
+../project1_divWsub.s:64     .text:00000080 END
+../project1_divWsub.s:49     .text:00000054 DWS_LOOP
+../project1_divWsub.s:55     .text:00000064 REMAINDER_CHECK
+../project1_divWsub.s:68     *ABS*:ffffffff MASK
+                   .debug_aranges:0000000c $d
+
+NO UNDEFINED SYMBOLS

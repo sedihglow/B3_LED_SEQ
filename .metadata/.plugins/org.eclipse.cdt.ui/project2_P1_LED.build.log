@@ -1,0 +1,18 @@
+
+**** Build of configuration Debug for project project2_P1_LED ****
+
+"c:\\ti\\ccsv6\\utils\\bin\\gmake" -k all 
+'Building file: ../project2_P1_main.s'
+'Invoking: GNU Compiler'
+"c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/arm-none-eabi-gcc.exe" -c -mcpu=cortex-a8 -mtune=cortex-a8 -march=armv7-a -marm -Dam3359 -I"c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/arm-none-eabi/include" -Xassembler -a=project2_P1_LED.lst -g -gstrict-dwarf -Wall -MMD -MP -MF"project2_P1_main.d" -MT"project2_P1_main.d" -o"project2_P1_main.o"  "../project2_P1_main.s"
+../project2_P1_main.s: Assembler messages:
+../project2_P1_main.s: Warning: end of file not at end of a line; newline inserted
+'Finished building: ../project2_P1_main.s'
+' '
+'Building target: project2_P1_LED.out'
+'Invoking: GNU Linker'
+"c:/ti/ccsv6/tools/compiler/gcc-arm-none-eabi-4_7-2013q3/bin/arm-none-eabi-gcc.exe" -Dam3359 -Xassembler -a=project2_P1_LED.lst -g -gstrict-dwarf -Wall -Wl,-Map,"project2_P1_LED.map" -nostartfiles -Wl,--defsym,STACKSIZE=0x18000 -Wl,--defsym,HEAPSIZE=0x400 -o"project2_P1_LED.out" "./project1_P1_delay.o" "./project2_P1_main.o" "./project2_P1_toggleLED.o" "./startup_ARMCA8.o" -Wl,-T"../AM335x.lds"  -Wl,--start-group -l"c" -l"gcc" -l"nosys" -Wl,--end-group 
+'Finished building target: project2_P1_LED.out'
+' '
+
+**** Build Finished ****
